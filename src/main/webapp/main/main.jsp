@@ -9,8 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%@ include file = "/include/bs4.jsp" %>
   <style>
+  body {
+  	 /* background-image: repeating-linear-gradient(#f69d3c, #3f87a6 50px); */
+  	 background-image: conic-gradient(from 90deg at 0% 0%,#55ff55, #55ffff, #5555ff 90deg);
+  }
   .fakeimg {
-    height: 200px;
+    height: 500px;
     background: #aaa;
   }
   </style>
@@ -65,14 +69,8 @@
     </div>
     <div class="col-sm-8">
       <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
-      <%-- <div class="fakeimg"><img src="${ctp}/images/${mainImage}.jpg" width="100%" height="100%"/></div> --%>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-      <br>
-      <h2>TITLE HEADING</h2>
       <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg"><img src="${ctp}/images/"/></div>
+      <div class="fakeimg"><img src="${ctp}/images/${mainImage}.jpg" width="100%" height="100%"/></div>
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
     </div>

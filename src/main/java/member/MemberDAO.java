@@ -230,5 +230,35 @@ public class MemberDAO {
 		}
 		return res;
 	}
+
+	public int setMemberUpdateOk(MemberVO vo) {
+		int res = 0;
+		try {
+			sql = "update member set mid=?, nickName=?, name=?,gender=?,birthday=?,tel=?,address=?,email=?,"
+					+ "homePage=?,job=?,hobby=?,photo=?,content=?,userInfor=? where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getMid());
+			pstmt.setString(2, vo.getNickName());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getGender());
+			pstmt.setString(5, vo.getBirthday());
+			pstmt.setString(6, vo.getTel());
+			pstmt.setString(7, vo.getAddress());
+			pstmt.setString(8, vo.getEmail());
+			pstmt.setString(9, vo.getHomePage());
+			pstmt.setString(10, vo.getJob());
+			pstmt.setString(11, vo.getHobby());
+			pstmt.setString(12, vo.getPhoto());
+			pstmt.setString(13, vo.getContent());
+			pstmt.setString(14, vo.getUserInfor());
+			pstmt.setString(15, vo.getMid());
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
 	
 }

@@ -141,7 +141,7 @@ public class LoginDAO {
 	public ArrayList<LoginVO> getRecentFiveMember() {
 		ArrayList<LoginVO> vos = new ArrayList<LoginVO>();
 		try {
-			sql = "select * from hoewon order by idx desc limit 3";
+			sql = "select * from hoewon order by idx desc limit 5";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			

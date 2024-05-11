@@ -77,7 +77,7 @@ public class GuestDAO {
 				vo.setEmail(rs.getString("email"));
 				vo.setHomePage(rs.getString("homePage"));
 				vo.setVisitDate(rs.getString("visitDate"));
-				vo.setHostIp(rs.getString("hostIp"));
+				vo.setHostIp(rs.getString("guestIP"));
 				
 				vos.add(vo);
 			}
@@ -161,7 +161,7 @@ public class GuestDAO {
 				vo.setEmail(rs.getString("email"));
 				vo.setHomePage(rs.getString("homePage"));
 				vo.setVisitDate(rs.getString("visitDate"));
-				vo.setHostIp(rs.getString("hostIp"));
+				vo.setHostIp(rs.getString("guestIP"));
 				vos.add(vo);
 			}
 		} catch (SQLException e) {

@@ -100,7 +100,7 @@ public class MemberController extends HttpServlet {
 			viewPage += "/memberUpdate.jsp";
 		}
 		else if(com.equals("/MemberUpdateOk")) {
-			command = new MemberUpdateCommand();
+			command = new MemberUpdateOkCommand();
 			command.execute(request, response);
 			viewPage += "/memberUpdate.jsp";
 		}

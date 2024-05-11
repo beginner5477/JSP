@@ -91,14 +91,14 @@ public class MemberLoginOkCommand implements MemberInterface {
 		else if(vo.getLevel() == 1) strLevel = "준회원";
 		else if(vo.getLevel() == 2) strLevel = "정회원";
 		else if(vo.getLevel() == 3) strLevel = "우수회원";
-			
+		else if(vo.getLevel() == 4) strLevel = "운영자";
 		// 필요한 정보를 session에 저장처리한다.
 		HttpSession session = request.getSession();
 		session.setAttribute("sMid", mid);
 		session.setAttribute("sNickName", vo.getNickName());
 		session.setAttribute("sLevel", vo.getLevel());
 		session.setAttribute("strLevel", strLevel);
-		
+		System.out.println(session.getAttribute("sLevel"));
 		request.setAttribute("message", mid+"님 로그인 되셨습니다.");
 		request.setAttribute("url", request.getContextPath()+"/MemberMain.mem");
 	}

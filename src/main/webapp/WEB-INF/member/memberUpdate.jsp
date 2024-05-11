@@ -14,9 +14,12 @@
   <script>
     'use strict';
     
-    let idCheckSw = 0;
-    let nickCheckSw = 0;
-    
+    let nickCheckSw = 1;
+    $(()=>{
+    	if('${message}'!='') {
+    		alert("${message}\n변경된 내용을 확인 부탁드립니다.");
+    	}
+    });
     function fCheck() {
     	// 유효성 검사.....
     	// 아이디,닉네임,성명,이메일,홈페이지,전화번호,비밀번호 등등....
@@ -29,7 +32,6 @@
     	
     	// 검사를 끝내고 필요한 내역들을 변수에 담아 회원가입처리한다.
     	let mid = myform.mid.value.trim();
-    	let pwd = myform.pwd.value.trim();
     	let nickName = myform.nickName.value;
     	let name = myform.name.value;
     	
@@ -48,17 +50,7 @@
     	let extraAddress = myform.extraAddress.value + " ";
     	let address = postcode + "/" + roadAddress + "/" + detailAddress + "/" + extraAddress;
     	
-    	if(!regMid.test(mid)) {
-    		alert("아이디는 4~20자리의 영문 소/대문자와 숫자, 언더바(_)만 사용가능합니다.");
-    		myform.mid.focus();
-    		return false;
-    	}
-    	else if(pwd.length < 4 && pwd.length > 20) {
-        alert("비밀번호는 4~20 자리로 작성해주세요.");
-        myform.pwd.focus();
-        return false;
-      }
-      else if(!regNickName.test(nickName)) {
+    	if(!regNickName.test(nickName)) {
         alert("닉네임은 한글만 사용가능합니다.");
         myform.nickName.focus();
         return false;
@@ -75,11 +67,7 @@
 			// 전화번호 형식 체크
 			
     	
-    	if(idCheckSw == 0) {
-    		alert("아이디 중복체크버튼을 눌러주세요");
-    		document.getElementById("midBtn").focus();
-    	}
-    	else if(nickCheckSw == 0) {
+    	if(nickCheckSw == 0) {
     		alert("닉네임 중복체크버튼을 눌러주세요");
     		document.getElementById("nickNameBtn").focus();
     	}
@@ -92,34 +80,6 @@
     	}
     }
     
-    // 아이디 중복체크
-    function idCheck() {
-    	let mid = myform.mid.value;
-    	
-    	if(mid.trim() == "") {
-    		alert("아이디를 입력하세요!");
-    		myform.mid.focus();
-    	}
-    	else {
-    		idCheckSw = 1;
-    		
-    		$.ajax({
-    			url  : "${ctp}/MemberIdCheck.mem",
-    			type : "get",
-    			data : {mid : mid},
-    			success:function(res) {
-    				if(res != '0') {
-    					alert("이미 사용중인 아이디 입니다. 다시 입력하세요.");
-    					myform.mid.focus();
-    				}
-    				else alert("사용 가능한 아이디 입니다.");
-    			},
-    			error : function() {
-    				alert("전송 오류!");
-    			}
-    		});
-    	}
-    }
     
     // 닉네임 중복체크
     function nickCheck() {
@@ -138,7 +98,11 @@
     			data : {nickName : nickName},
     			success:function(res) {
     				if(res != '0') {
-    					alert("이미 사용중인 닉네임 입니다. 다시 입력하세요.");
+    					if('${sNickName}'==nickName) {
+    						alert("이전 닉네임(${sNickName}과 똑같은 닉네임입니다.)")
+    					} else {
+	    					alert("이미 사용중인 닉네임 입니다. 다시 입력하세요.");
+    					}
     					myform.nickName.focus();
     				}
     				else alert("사용 가능한 닉네임 입니다.");
@@ -150,13 +114,11 @@
     	}
     }
     
-    $(function(){
-    	$("#mid").on("blur", () => {
-    		idCheckSw = 0;
-    	});
-    	
+    $(function() {
     	$("#nickName").on("blur", () => {
-    		nickCheckSw = 0;
+    		if('${sNickName}'!=myform.nickName.value) {
+    			nickCheckSw = 0;
+    		}
     	});
     	
     });
@@ -238,16 +200,16 @@
     <div class="form-group">
       <label for="address">주소</label>
       <div class="input-group mb-1">
-        <input type="text" name="postcode" value="${postcode}" id="sample6_postcode" placeholder="우편번호" class="form-control">
+        <input type="text" name="postcode" value="${fn:trim(postcode)}" id="sample6_postcode" placeholder="우편번호" class="form-control">
         <div class="input-group-append">
           <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary">
         </div>
       </div>
-      <input type="text" name="roadAddress" value="${roadAddress}" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1">
+      <input type="text" name="roadAddress" value="${fn:trim(roadAddress)}" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1">
       <div class="input-group mb-1">
-        <input type="text" name="detailAddress" value="${detailAddress}" id="sample6_detailAddress" placeholder="상세주소" class="form-control"> &nbsp;&nbsp;
+        <input type="text" name="detailAddress" value="${fn:trim(detailAddress)}" id="sample6_detailAddress" placeholder="상세주소" class="form-control"> &nbsp;&nbsp;
         <div class="input-group-append">
-          <input type="text" name="extraAddress" value="${extraAddress}" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
+          <input type="text" name="extraAddress" value="${fn:trim(extraAddress)}" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
         </div>
       </div>
     </div>
@@ -286,18 +248,18 @@
       <div class="form-check-inline">
         <span class="input-group-text">정보공개</span>  &nbsp; &nbsp;
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="userInfor" value="공개" checked/>공개
+          <input type="radio" class="form-check-input" name="userInfor" value="공개" ${vo.getUserInfor() == '공개'? 'checked' : ''}/>공개
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="userInfor" value="비공개"/>비공개
+          <input type="radio" class="form-check-input" name="userInfor" value="비공개" ${vo.getUserInfor() == '비공개'? 'checked' : ''}/>비공개
         </label>
       </div>
     </div>
     <div  class="form-group">
       회원 사진(파일용량:2MByte이내) : <img src="${ctp}/images/member/${vo.photo}" width="100px"/>
-      <input type="file" name="fName" id="file" class="form-control-file border"/>
+      <input type="file" name="photo" id="file" class="form-control-file border"/>
     </div>
     <button type="button" class="btn btn-secondary" onclick="fCheck()">회원정보수정</button> &nbsp;
     <button type="reset" class="btn btn-secondary">다시작성</button> &nbsp;
