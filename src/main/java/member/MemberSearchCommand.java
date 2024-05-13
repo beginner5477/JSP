@@ -15,7 +15,7 @@ public class MemberSearchCommand implements MemberInterface {
 		MemberDAO dao = new MemberDAO();
 		
 		MemberVO vo = dao.getMemberIdCheck(mid);
-		
+		vo.setAddress(vo.getAddress().replace("/", " "));
 		request.setAttribute("vo", vo);
 	}
 

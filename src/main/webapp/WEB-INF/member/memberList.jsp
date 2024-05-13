@@ -40,10 +40,16 @@
       <th>생일</th>
       <th>성별</th>
       <th>최종방문일</th>
+      <c:if test="${sLevel == 0}">
       <th>오늘방문횟수</th>
+      <th>삭제신청여부</th>
+      <th>활동 여부</th>
+      </c:if>
     </tr>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <c:if test="${vo.userInfor == '공개'}">
+      	<c:if test="${vo.userDel == 'OK'}"><c:set var="activity" value="탈퇴신청"></c:set></c:if>
+      	<c:if test="${vo.userDel != 'OK'}"><c:set var="activity" value="활동중"></c:set></c:if>
 	      <tr>
 	        <td>${vo.idx}</td>
 	        <td><a href="MemberSearch.mem?mid=${vo.mid}">${vo.mid}</a></td>
@@ -52,7 +58,11 @@
 	        <td>${fn:substring(vo.birthday,0,10)}</td>
 	        <td>${vo.gender}</td>
 	        <td>${fn:substring(vo.lastDate,0,10)}</td>
+	        <c:if test="${sLevel == 0}">
 	        <td>${vo.todayCnt}</td>
+	        <td>${vo.userDel}</td>
+	        <td>${activity}</td>
+	        </c:if>
 	      </tr>
       </c:if>
     </c:forEach>
@@ -71,7 +81,10 @@
 		      <th>생일</th>
 		      <th>성별</th>
 		      <th>최종방문일</th>
+		      <c:if test="${sLevel == 0}">
 		      <th>오늘방문횟수</th>
+		      <th>활동여부(삭제신청여부)</th>
+		      </c:if>
 		    </tr>
 		    <c:forEach var="vo" items="${vos}" varStatus="st">
 		      <c:if test="${vo.userInfor == '비공개'}">
@@ -83,7 +96,10 @@
 			        <td>${fn:substring(vo.birthday,0,10)}</td>
 			        <td>${vo.gender}</td>
 			        <td>${fn:substring(vo.lastDate,0,10)}</td>
+			        <c:if test="${sLevel == 0}">
 			        <td>${vo.todayCnt}</td>
+			        <td>${vo.userDel}</td>
+			        </c:if>
 			      </tr>
 		      </c:if>
 		    </c:forEach>

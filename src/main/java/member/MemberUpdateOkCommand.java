@@ -67,6 +67,7 @@ public class MemberUpdateOkCommand implements MemberInterface {
 		if(res != 0) {
 			request.setAttribute("message", "회원 정보 수정이 완료되었습니다.");
 			session.setAttribute("sNickName", nickName);
+			
 		} else {
 			request.setAttribute("message", "회원 정보 수정 실패하였습니다.");
 		}

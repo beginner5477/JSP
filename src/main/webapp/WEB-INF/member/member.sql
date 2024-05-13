@@ -32,5 +32,8 @@ create table member (
 desc member;
 
 insert into member values (default,'admin','1234','관리맨','관리자','남자',default,'010-1234-4567','050/서울시/그린아파트/100동/101호','abc@atom.com','http://wwww.atom.com','학생','등산',default,'관리자입니다.',default,default,default,default,default,default,default,default);
+insert into member values (default,'gd5','1234','gd5','관리자','남자',default,'010-1234-4567','050/서울시/그린아파트/100동/101호','abc@atom.com','http://wwww.atom.com','학생','등산',default,'관리자입니다.',default,default,default,default,default,default,default,default);
 
 select * from member;
+
+SELECT lastDate, NOW(), TIMESTAMPDIFF(DAY, lastDate, NOW()) AS deleteDiff FROM MEMBER;
