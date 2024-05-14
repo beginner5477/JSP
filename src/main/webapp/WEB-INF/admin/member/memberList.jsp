@@ -176,7 +176,7 @@
       	<c:if test="${vo.userDel == 'OK'}"><c:set var="activity" value="탈퇴신청"></c:set></c:if>
       	<c:if test="${vo.userDel != 'OK'}"><c:set var="activity" value="활동중"></c:set></c:if>
 	      <tr>
-	        <td><input type="checkbox" id="ch${st.count}" name="ch" value="${vo.idx}"/>${vo.idx}</td>
+	        <td><input type="checkbox" style="zoom: 1.5;" id="ch${st.count}" name="ch" value="${vo.idx}"/>${vo.idx}</td>
 	        <td><a href="MemberSearch.mem?mid=${vo.mid}">${vo.mid}</a></td>
 	        <td>${vo.nickName}</td>
 	        <td>${vo.name}</td>

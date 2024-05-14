@@ -70,7 +70,9 @@
     <div class="col-sm-8">
       <h2>TITLE HEADING</h2>
       <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg"><img src="${ctp}/images/${mainImage}.jpg" width="100%" height="100%"/></div>
+      <div class="fakeimg"><c:if test="${mainImage > 115}"><img src="${ctp}/images/${mainImage}.gif" width="100%" height="100%"/></c:if>
+      <c:if test="${mainImage <= 115}"><img src="${ctp}/images/${mainImage}.jpg" width="100%" height="100%"/></c:if>
+      </div>
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
     </div>

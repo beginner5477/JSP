@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.board.BoardContentCommand;
+import admin.board.BoardListCommand;
 import admin.member.MemberLevelChangeCommand;
 import admin.member.MemberListCommand;
 
@@ -63,6 +65,16 @@ public class AdminMemberController extends HttpServlet {
 			command = new AllMemberChageCommand();
 			command.execute(request, response);
 			return;
+		}
+		else if(com.equals("/BoardList")) {
+			command = new BoardListCommand();
+			command.execute(request, response);
+			viewPage += "/board/boardList.jsp";
+		}
+		else if(com.equals("/BoardContent")) {
+			command = new BoardContentCommand();
+			command.execute(request, response);
+			viewPage += "/board/boardContent.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
