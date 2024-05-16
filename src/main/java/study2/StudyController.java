@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import study2.ajax.AjaxIdCheck0Command;
 import study2.ajax.AjaxIdCheck1Command;
+import study2.hoewon.HoewonDeleteCommand;
+import study2.hoewon.HoewonInputCommand;
+import study2.hoewon.HoewonMainCommand;
+import study2.hoewon.HoewonSearchCommand;
+import study2.hoewon.HoewonUpdateCommand;
+import study2.modal.ModalTestCommand;
 
 @SuppressWarnings("serial")
 @WebServlet("*.st")
@@ -68,6 +74,14 @@ public class StudyController extends HttpServlet {
 		}
 		else if(com.equals("uuidForm")) {
 			viewPage += "/uuid/uuidForm.jsp";
+		}
+		else if(com.equals("Modal1")) {
+			viewPage += "/modal/modal1.jsp";
+		}
+		else if(com.equals("Modal2")) {
+			command = new ModalTestCommand();
+			command.execute(request, response);
+			viewPage += "/modal/modal2.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

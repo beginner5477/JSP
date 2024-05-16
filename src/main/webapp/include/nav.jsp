@@ -62,6 +62,8 @@
 				      <a class="dropdown-item" href="${ctp}/ajaxTest3.st">AJAX연습(회원관리)</a>
 				      <a class="dropdown-item" href="${ctp}/uuidForm.st">UUID연습</a>
 				      <a class="dropdown-item" href="${ctp}/study/database/login.jsp">로그인연습</a>
+				      <a class="dropdown-item" href="Modal1.st">모달연습1</a>
+				      <a class="dropdown-item" href="Modal2.st">모달연습2</a>
 				    </div>
 				  </div>
 	      </li>

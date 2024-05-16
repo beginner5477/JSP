@@ -14,6 +14,12 @@
 		let pageSize = $("#pageSize").val();
 		location.href = "BoardList.bo?pageSize="+pageSize;
 	}
+  	function modalCheck(name, mid, nickName) {
+  		let n1 = 1;
+  		$("#myModal #modalName").html(name);
+  		$("#myModal #modalMid").text(mid);
+  		$("#myModal #modalNickName").text(nickName);
+  	}
 </script>
 </head>
 <body>
@@ -46,21 +52,26 @@
 			<th>글쓴날짜</th>
 			<th>조회수</th>
 		</tr>
+		<c:set var="curScrStartNo" value="${curScrStartNo}"/>
 		<c:forEach var="vo" items="${vos}" varStatus="st">
 			<c:if test="${vo.getOpenSw() == 'OK'||sLevel == 0 || sNickName == vo.nickName}">
 			<tr>
-				<td>${vo.idx}</td>
+				<td>${curScrStartNo}</td>
 				<td>
 					<a href="BoardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a>
 					<c:if test="${vo.hour_diff < 24}"><img src="${ctp}/images/new.gif"/></c:if> 
 				</td>
-				<td>${vo.nickName}</td>
+				<td>
+					${vo.nickName}
+					<c:if test="${sLevel == 0}"><a href="#" onclick="modalCheck('${sName}','${sMid}','${vo.nickName}')" data-toggle="modal" data-target="#myModal">모달</a></c:if>
+				</td>
 				<!-- 1일 이내는 시간만 표시하고 1일 초과는 날짜 시간  표시해주기 c:if조지면 끝이요
 					단 24시간 이내를 만족시키는 자료중에 날짜 어제로 넘어가는 거는 날짜시간표시해주고 아닌거는 시간만 표시해주기  -->
 				<td>
 				 	${vo.date_diff == 0 ? fn:substring(vo.wDate,11,19) : fn:substring(vo.wDate,0,19) }
 				</td>
 				<td>${vo.readNum}(${vo.good})</td>
+				<c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
 			</tr>
 			</c:if>
 		</c:forEach>
@@ -81,6 +92,33 @@
 	<!-- 블록페이지 끝 -->
 </div>
 <p><br/><p>
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form name="midModalForm">
+            아이디 : <span id="modalMid"></span><br/>
+            성명 : <span id="modalName"></span><br/>
+            닉네임 : <span id="modalNickName"></span><br/>
+          </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 <%@ include file="/include/footer.jsp" %>
 </body>
 </html>

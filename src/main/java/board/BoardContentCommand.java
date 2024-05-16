@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.AdminDAO;
+
 public class BoardContentCommand implements BoardInterface {
 
 	@Override
@@ -41,6 +43,10 @@ public class BoardContentCommand implements BoardInterface {
 		request.setAttribute("nextVo", nextVo);
 		request.setAttribute("pag", pag);
 		request.setAttribute("pageSize", pageSize);
+		//신고글 유무 처리
+		AdminDAO adminDao = new AdminDAO();
+		String report = adminDao.getReport("board", idx);
+		request.setAttribute("report", report);
 	}
 
 }

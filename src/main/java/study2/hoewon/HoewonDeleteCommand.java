@@ -1,4 +1,4 @@
-package study2;
+package study2.hoewon;
 
 import java.io.IOException;
 
@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import study.database.LoginDAO;
 import study.database.LoginVO;
+import study2.StudyInterface;
 
-public class HoewonSearchCommand implements StudyInterface {
+public class HoewonDeleteCommand implements StudyInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -19,9 +20,9 @@ public class HoewonSearchCommand implements StudyInterface {
 		
 		LoginVO vo = dao.getLoginIdxSearch(idx);
 		
-		String str = idx + "/" + vo.getMid() + "/" + vo.getPwd() + "/" + vo.getName() + "/" + vo.getAge() + "/" + vo.getGender() + "/" + vo.getAddress();
+		dao.setLoginDelete(vo.getMid());
 		
-		response.getWriter().write(str);
+		response.getWriter().write("1");
 	}
 
 }

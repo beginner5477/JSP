@@ -94,6 +94,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		else if(vo.getLevel() == 4) strLevel = "운영자";
 		// 필요한 정보를 session에 저장처리한다.
 		HttpSession session = request.getSession();
+		session.setAttribute("sName", vo.getName());
 		session.setAttribute("sMid", mid);
 		session.setAttribute("sNickName", vo.getNickName());
 		session.setAttribute("sLevel", vo.getLevel());
