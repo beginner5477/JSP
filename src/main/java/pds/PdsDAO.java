@@ -110,7 +110,7 @@ public class PdsDAO {
 		} finally {
 			rsClose();
 		}
-		return null;
+		return vos;
 	}
 	//자료실 업로드 파일의 정보를 DB에 저장시키기
 	public int setPdsInputOk(PdsVO vo) {
