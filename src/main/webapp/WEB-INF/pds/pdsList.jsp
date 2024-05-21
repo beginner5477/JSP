@@ -52,7 +52,7 @@
 		<c:forEach var="vo" items="${vos}" varStatus="st">
 			<tr>
 				<td>${curScrStartNo}</td>
-				<td><a href="pdsContent.pds?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&part=${part}">${title}</a></td>
+				<td><a href="pdsContent.pds?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&part=${part}">${vo.title}</a></td>
 				<td>${vo.nickName}</td>
 				<td>${vo.fDate}</td>
 				<td>${vo.part}</td>

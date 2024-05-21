@@ -102,6 +102,7 @@ public class PdsDAO {
 				vo.setPwd(rs.getString("pwd"));
 				vo.setHostIp(rs.getString("hostIp"));
 				vo.setContent(rs.getString("content"));
+				vo.setTitle(rs.getString("title"));
 				
 				vos.add(vo);
 			}
