@@ -29,7 +29,11 @@
 <div class="container">
 	<table class="table table-borderless m-0 p-0">
 		<tr>
-			<td colspan="2"><h2>게 시 판 리 스 트</h2></td>
+			<td colspan="2">
+				<h2>게 시 판 조 건 별 리 스 트</h2>
+				(<font color="blue">${search}</font>)에서 ${searchString}을 검색한 결과 ${searchCount}건의 자료가 검색되었습니다.)
+			</td>
+			
 		</tr>
 		<tr>
 			<td><c:if test="${sLevel != 1}"><a href="BoardInput.bo" class="btn btn-success btn-sm">글쓰기</a></c:if></td>

@@ -227,4 +227,66 @@ public class BoardDAO {
 		}
 		return res;
 	}
+	//게시글의 댓글 내용 가져오기
+	public ArrayList<BoardReplyVO> getBoardReply(int idx) {
+		ArrayList<BoardReplyVO> replyVos = new ArrayList<BoardReplyVO>();
+		try {
+			sql = "SELECT * FROM boardReply WHERE boardIdx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			BoardReplyVO vo = null;
+			while(rs.next()) {
+				vo = new BoardReplyVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setBoardIdx(rs.getInt("boardIdx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setContent(rs.getString("content"));
+				replyVos.add(vo);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		} finally {
+			rsClose();
+		}
+		return replyVos;
+	}
+	//댓글 등록시키기
+	public int setReplyInput(BoardReplyVO vo) {
+		int res = 0;
+		try {
+			System.out.println(vo);
+			sql = "INSERT INTO boardReply VALUES (DEFAULT,?,?,?,DEFAULT,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getBoardIdx());
+			pstmt.setString(2, vo.getMid());
+			pstmt.setString(3, vo.getNickName());
+			pstmt.setString(4, vo.getHostIp());
+			pstmt.setString(5, vo.getContent());
+			res = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.getMessage();
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
+	//댓글 삭제 처리하기
+	public int setBoardReplyDelete(int idx) {
+		int res = 0;
+		try {
+			sql = "DELETE FROM boardReply WHERE idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			res = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.getMessage();
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
 }

@@ -47,6 +47,11 @@ public class BoardContentCommand implements BoardInterface {
 		AdminDAO adminDao = new AdminDAO();
 		String report = adminDao.getReport("board", idx);
 		request.setAttribute("report", report);
+		
+		System.out.println(idx);
+		//댓글 내용 가져가기
+		ArrayList<BoardReplyVO> replyVos = dao.getBoardReply(idx);
+		request.setAttribute("replyVos", replyVos);
 	}
 
 }

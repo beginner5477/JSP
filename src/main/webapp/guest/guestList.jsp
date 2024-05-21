@@ -17,7 +17,7 @@
     }
   </style>
   <script>
-    'use strict';kms1234
+    'use strict';
     
     function delCheck(idx) {
     	let ans = confirm("현재 방문글을 삭제하시겠습니까?");
@@ -32,6 +32,7 @@
     	location.href = "${ctp}/GuestList?pag=${pag}&pageSize="+pageSize;
     }
   </script>
+<%@ include file = "/include/mouse.jsp" %>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />

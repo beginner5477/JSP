@@ -15,7 +15,7 @@ public class UuidProcess extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UUID uid = UUID.randomUUID();
-		
+//		System.out.println(uid.getClass().getName());	//자바에서 참조타입의 타입 형 구하는 방법
 		response.getWriter().write(uid.toString());
 	}
 }

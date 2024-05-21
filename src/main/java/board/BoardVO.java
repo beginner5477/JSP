@@ -13,6 +13,13 @@ public class BoardVO {
 	private int good;
 	private int hour_diff; 
 	private int date_diff; 
+	private int replyCnt;	//해당 글의 댓글 수를 저장하는 변수
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
 	public int getHour_diff() {
 		return hour_diff;
 	}

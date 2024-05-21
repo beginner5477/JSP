@@ -64,6 +64,7 @@
 				cpMid: "${sMid}",
 				cpContent: cpContent
 		}
+		console.log(typeof(query));
 		alert("신고내용"+cpContent);
 		$.ajax({
 			url: "boardComplaintInput.ad",
@@ -79,6 +80,54 @@
 			},
 			error:function() {
 				alert("전송오류");
+			}
+			
+		});
+	}
+	function replyCheck() {
+		let content = $("#content").val();
+		if(content.trim() == "") {
+			alert("댓글을 입력하세요");
+			return false;
+		}
+		let query = {
+				boardIdx : ${vo.idx},
+				mid : '${sMid}',
+				nickName : '${sNickName}',
+				hostIp : '${pageContext.request.remoteAddr}',
+				content : content
+		}
+		$.ajax({
+			url : "BoardReplyInput.bo",
+			type: "post",
+			data: query,
+			success:function(res) {
+				if(res != "0") {
+					alert("댓글이 입력되었습니다.");
+					location.reload();
+				}
+			},
+			error:function() {
+				alert("전송오류");
+			}
+		});
+	}
+	function replyDelete(idx) {
+		let ans = confirm("선택한 댓글을 삭제하시겠습니까?");
+		if(!ans) return false;
+		$.ajax({
+			url:"BoardReplyDelete.bo",
+			type: "post",
+			data : {idx : idx},
+			success:function(res) {
+				if(res != "0") {
+					alert("댓글이 삭제 되었습니다.");
+					location.reload();
+				}
+				else alert("삭제 실패");	
+			},
+			error:function() {
+				alert("전송 실패요");
 			}
 			
 		});
@@ -144,6 +193,41 @@
 	</table>
 </div>
 <p><br/><p>
+<div class="container">
+	<!-- 댓글 리스트 보여주기 -->
+	<table class="table table-hover text-center">
+		<tr>
+			<th>작성자</th>
+			<th>댓글내용</th>
+			<th>댓글일자</th>
+			<th>접속IP</th>
+		</tr>
+		<c:forEach var="replyVo" items="${replyVos}" varStatus="st">
+			<tr>
+				<td>${replyVo.nickName}<c:if test="${sMid == replyVo.mid || sLevel == 0}"><a title="댓글삭제" href="javascript:replyDelete(${replyVo.idx})">(x)</a></c:if></td>
+				<td class="text-left">${fn:replace(replyVo.content,newLine,"<br/>")}</td>
+				<td>${fn:substring(replyVo.wDate,0,10)}</td>
+				<td>${replyVo.hostIp}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<!-- 댓글 입력창 -->
+	<form name="replyForm">
+		<table class="table table-center">
+			<tr>
+				<td style="width:85%" class="text-left">
+					글내용:
+					<textarea rows="4" name="content" id="content" class="form-control"></textarea>
+				</td>
+				<td style="width:15%">
+					<br/>
+					<p>작성자: ${sNickName}</p>
+					<p><input type="button" value="댓글달기" onclick="replyCheck()" class="btn btn-info"/></p>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
 <!-- 신고용 모달 창 -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">

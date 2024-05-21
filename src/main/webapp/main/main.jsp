@@ -18,6 +18,7 @@
     background: #aaa;
   }
   </style>
+<%@ include file = "/include/mouse.jsp" %>
 </head>
 <body>
 
@@ -79,5 +80,6 @@
   </div>
 </div>
 <%@ include file = "../../include/footer.jsp" %>
+
 </body>
 </html>

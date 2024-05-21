@@ -17,6 +17,14 @@ import study2.hoewon.HoewonMainCommand;
 import study2.hoewon.HoewonSearchCommand;
 import study2.hoewon.HoewonUpdateCommand;
 import study2.modal.ModalTestCommand;
+import study2.pdsTest.FileUpload1OkCommand;
+import study2.pdsTest.FileUpload2OkCommand;
+import study2.pdsTest.FileUpload3OkCommand;
+import study2.pdsTest.FileUpload4OkCommand;
+import study2.pdsTest.FiledownLoadCommand;
+import study2.pdsTest.JavaFileDownloadCommand;
+import study2.pdsTest.SelectDeleteCommand;
+import study2.pdsTest.fileDeleteCommand;
 
 @SuppressWarnings("serial")
 @WebServlet("*.st")
@@ -82,6 +90,64 @@ public class StudyController extends HttpServlet {
 			command = new ModalTestCommand();
 			command.execute(request, response);
 			viewPage += "/modal/modal2.jsp";
+		}
+		else if(com.equals("FileUpload1")) {
+			viewPage += "/pdsTest/fileUpload1.jsp";
+		}
+		else if(com.equals("FileUpload1Ok")) {
+			command = new FileUpload1OkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("FileUpload2")) {
+			viewPage += "/pdsTest/fileUpload2.jsp";
+		}
+		else if(com.equals("FileUpload2Ok")) {
+			command = new FileUpload2OkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("FileUpload3")) {
+			viewPage += "/pdsTest/fileUpload3.jsp";
+		}
+		else if(com.equals("FileUpload3Ok")) {
+			command = new FileUpload3OkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("FileUpload4")) {
+			viewPage += "/pdsTest/fileUpload4.jsp";
+		}
+		else if(com.equals("FileUpload5")) {
+			viewPage += "/pdsTest/fileUpload5.jsp";
+		}
+		else if(com.equals("FileUpload6")) {
+			viewPage += "/pdsTest/fileUpload6.jsp";
+		}
+		else if(com.equals("FileUpload4Ok")) {
+			command = new FileUpload4OkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("downLoad")) {
+			command = new FiledownLoadCommand();
+			command.execute(request, response);
+			viewPage += "/pdsTest/fileDownLoad.jsp";
+		}
+		else if(com.equals("fileDelete")) {
+			command = new fileDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("SelDelete")) {
+			command = new SelectDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("JavaFileDownload")) {
+			command = new JavaFileDownloadCommand();
+			command.execute(request, response);
+			return;
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
