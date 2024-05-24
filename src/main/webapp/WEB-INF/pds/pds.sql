@@ -23,3 +23,26 @@ CREATE TABLE pds (
 
 DESC pds;
 SELECT * FROM pds;
+
+CREATE TABLE memberChat(
+	idx INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	nickName VARCHAR(20) NOT NULL,
+	chat VARCHAR(100) NOT NULL
+);
+DESC memberChat;
+INSERT INTO memberChat VALUES (DEFAULT,'admin',"하이용1");
+INSERT INTO memberChat VALUES (DEFAULT,'ㅇㅇㅇ',"하이용2");
+INSERT INTO memberChat VALUES (DEFAULT,'admㅁㅁin',"하이용3");
+INSERT INTO memberChat VALUES (DEFAULT,'ㅁㅁ',"하이용2");
+INSERT INTO memberChat VALUES (DEFAULT,'ㅁㅁ',"하이용1");
+INSERT INTO memberChat VALUES (DEFAULT,'ㅇㅇㅇ',"하이용4");
+INSERT INTO memberChat VALUES (DEFAULT,'admin',"하이용56");
+INSERT INTO memberChat VALUES (DEFAULT,'admin',"하이용7");
+INSERT INTO memberChat VALUES (DEFAULT,'ㅇㅇㅇ',"하이용8");
+INSERT INTO memberChat VALUES (DEFAULT,'admin',"하이용9");
+INSERT INTO memberChat VALUES (DEFAULT,'admin',"하이용0");
+INSERT INTO memberChat VALUES (DEFAULT,'ㅇㅇㅇ',"하이용1");
+INSERT INTO memberChat VALUES (DEFAULT,'admin',"하이용2");
+INSERT INTO memberChat VALUES (DEFAULT,'ㅁㅁㅁ',"하이용3");
+SELECT * FROM memberChat ORDER BY idx DESC LIMIT 11;
+SELECT m.* FROM (SELECT * FROM memberChat ORDER BY idx DESC LIMIT 11) AS m ORDER BY idx ASC;

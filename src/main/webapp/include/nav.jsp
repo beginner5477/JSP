@@ -45,6 +45,8 @@
 				      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0430_web_xml/init/t03_init.jsp">초기값확인</a>
 				      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0430_web_xml/lifeCycle/lifeCycle2.jsp">서블릿 생명주기</a>
 				      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/database/LoginList">데이터베이스연습</a>
+				      <a class="dropdown-item" href="Calendar1.st">달력 연습1</a>
+				      <a class="dropdown-item" href="Calendar2.st">달력 연습2</a>
 				    </div>
 				  </div>
 	      </li>

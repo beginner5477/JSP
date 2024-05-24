@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import study2.ajax.AjaxIdCheck0Command;
 import study2.ajax.AjaxIdCheck1Command;
+import study2.calendar.Calendar1Command;
+import study2.calendar.Calendar2Command;
 import study2.hoewon.HoewonDeleteCommand;
 import study2.hoewon.HoewonInputCommand;
 import study2.hoewon.HoewonMainCommand;
@@ -148,6 +150,16 @@ public class StudyController extends HttpServlet {
 			command = new JavaFileDownloadCommand();
 			command.execute(request, response);
 			return;
+		}
+		else if(com.equals("Calendar1")) {
+			command = new Calendar1Command();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar1.jsp";
+		}
+		else if(com.equals("Calendar2")) {
+			command = new Calendar2Command();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar2.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

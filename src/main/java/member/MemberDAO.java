@@ -276,5 +276,18 @@ public class MemberDAO {
 		}
 		return res;
 	}
+
+	//채팅내용 DB에 저장하기
+	public void setMemberChatInputOk(String nickName, String chat) {
+		try {
+			sql = "INSERT INTO chat VALUES (DEFAULT,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			pstmt.setString(2, chat);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	
 }

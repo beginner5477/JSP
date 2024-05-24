@@ -112,6 +112,11 @@ public class MemberController extends HttpServlet {
 		else if(com.equals("/MemberDelete")) {
 			viewPage += "/memberPwdDeleteCheck.jsp";
 		}
+		else if(com.equals("/MemberChatInput")) {
+			command = new MemberChatInputCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

@@ -73,12 +73,12 @@ public class PdsDAO {
 		List<PdsVO> vos = new ArrayList<PdsVO>();
 		try {
 			if(part.equals("전체")) {
-				sql = "SELECT * FROM pds ORDER BY idx DESC LIMIT ?,?";
+				sql = "SELECT *, DATEDIFF(fDate,NOW()) AS date_diff, TIMESTAMPDIFF(HOUR,fDate,NOW()) AS hour_diff FROM pds ORDER BY idx DESC LIMIT ?,?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, startIndexNo);
 				pstmt.setInt(2, pageSize);
 			} else {
-				sql = "SELECT * FROM pds WHERE part = ? ORDER BY idx DESC LIMIT ?,?";
+				sql = "SELECT *, DATEDIFF(fDate,NOW()) AS date_diff,TIMESTAMPDIFF(HOUR,fDate,NOW()) AS hour_diff FROM pds WHERE part = ? ORDER BY idx DESC LIMIT ?,?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, part);
 				pstmt.setInt(2, startIndexNo);
@@ -103,9 +103,14 @@ public class PdsDAO {
 				vo.setHostIp(rs.getString("hostIp"));
 				vo.setContent(rs.getString("content"));
 				vo.setTitle(rs.getString("title"));
+				vo.setHour_diff(rs.getInt("hour_diff"));
+				vo.setDate_diff(rs.getInt("date_diff"));
 				
 				vos.add(vo);
 			}
+			System.out.println(vos);
+			System.out.println(sql);
+			System.out.println(startIndexNo+""+pageSize);
 		} catch (SQLException e) {
 			System.out.println("SQL오류" + e.getMessage());
 		} finally {
@@ -138,5 +143,40 @@ public class PdsDAO {
 			pstmtClose();
 		}
 		return res;
+	}
+	//자료실 idx로 개별 검색
+	public PdsVO getpdsIdxSearch(int idx) {
+		PdsVO vo = new PdsVO();
+		try {
+			sql = "SELECT *, DATEDIFF(fDate,NOW()) AS date_diff, TIMESTAMPDIFF(HOUR,fDate,NOW()) AS hour_diff FROM pds WHERE idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setfName(rs.getString("fName"));
+				vo.setfSName(rs.getString("fSName"));
+				vo.setfSize(rs.getInt("fSize"));
+				vo.setTitle(rs.getString("title"));
+				vo.setPart(rs.getString("part"));
+				vo.setfDate(rs.getString("fDate"));
+				vo.setDownNum(rs.getInt("downNum"));
+				vo.setOpenSw(rs.getString("openSw"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setContent(rs.getString("content"));
+				vo.setTitle(rs.getString("title"));
+				vo.setHour_diff(rs.getInt("hour_diff"));
+				vo.setDate_diff(rs.getInt("date_diff"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류" + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vo;
 	}
 }

@@ -10,11 +10,25 @@ public class PdsVO {
 	private String title;
 	private String part;
 	private String fDate;
+	private int date_diff;
+	private int hour_diff;
 	public int getIdx() {
 		return idx;
 	}
 	public void setIdx(int idx) {
 		this.idx = idx;
+	}
+	public int getDate_diff() {
+		return date_diff;
+	}
+	public void setDate_diff(int date_diff) {
+		this.date_diff = date_diff;
+	}
+	public int getHour_diff() {
+		return hour_diff;
+	}
+	public void setHour_diff(int hour_diff) {
+		this.hour_diff = hour_diff;
 	}
 	public String getMid() {
 		return mid;
@@ -26,8 +40,8 @@ public class PdsVO {
 	public String toString() {
 		return "PdsVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", fName=" + fName + ", fSName="
 				+ fSName + ", fSize=" + fSize + ", title=" + title + ", part=" + part + ", fDate=" + fDate
-				+ ", downNum=" + downNum + ", openSw=" + openSw + ", hostIp=" + hostIp + ", pwd=" + pwd + ", content="
-				+ content + "]";
+				+ ", date_diff=" + date_diff + ", hour_diff=" + hour_diff + ", downNum=" + downNum + ", openSw="
+				+ openSw + ", hostIp=" + hostIp + ", pwd=" + pwd + ", content=" + content + "]";
 	}
 	public String getNickName() {
 		return nickName;

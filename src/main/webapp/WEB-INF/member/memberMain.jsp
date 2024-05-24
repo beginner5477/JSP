@@ -9,6 +9,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>memberMain.jsp</title>
   <%@ include file = "/include/bs4.jsp" %>
+<script>
+	function chatInput() {
+		let chat = $("#chat").val();
+		if(chat.trim() != "") {
+			$.ajax({
+				url : "MemberChatInput.mem",
+				type : "post",
+				data : {chat : chat},
+				error : () => {
+					alert("전송실패");
+				}
+			});
+		}
+	}
+</script>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
@@ -18,6 +33,18 @@
   <h2>회원 전용방</h2>
   <hr/>
   <!-- 실시간 채팅방(DB) -->
+  <div style="width:460px;">
+  	<form name="chatForm" action="">
+  		<label for="chat"><b>실시간 대화방</b></label>
+  		<iframe src="${ctp}/include/memberMessage.jsp" width="100%" height="200px" class="border"></iframe>
+  		<div class="input-group mt-1">
+  			<input type="text" name="chat" id="chat" placeholder="대화내용을 입력해주세요" autofocus/>
+  			<div class="input-group-append">
+  				<input type="button" value="글등록" onclick="chatInput()" class="btn btn-success"/>
+  			</div>
+  		</div>
+  	</form>
+  </div>
   <hr/>
   <div class="row">
     <div class="col">

@@ -52,7 +52,10 @@
 		<c:forEach var="vo" items="${vos}" varStatus="st">
 			<tr>
 				<td>${curScrStartNo}</td>
-				<td><a href="pdsContent.pds?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&part=${part}">${vo.title}</a></td>
+				<td>
+					<a href="PdsContent.pds?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a>
+					<c:if test="${vo.hour_diff < 24}"><img src="${ctp}/images/new.gif"/></c:if> 
+				</td>
 				<td>${vo.nickName}</td>
 				<td>${vo.fDate}</td>
 				<td>${vo.part}</td>
@@ -64,7 +67,7 @@
 					<c:if test="${vo.mid == sMid || sLevel == 0}">
 						<a href="#">삭제</a><br/>
 					</c:if>
-					<a href="PdsTotalDown.pds?idx=${vo.idx}">전체파일 다운로드</a>
+				<a href="PdsTotalDown.pds?idx=${vo.idx}">전체파일 다운로드</a>
 				</td>
 			</tr>
 		<c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
